@@ -1,0 +1,466 @@
+Variable:
+HOSTNAME = swt02klngc-bj03
+vlanif ip = 10.134.129.37
+interface 10GE1/0/1
+x
+interface 10GE1/0/2
+x
+trunk allowed vlan = TAV
+dfs = priority 120
+source ip 192.168.101.2 vpn-instance mgmt peer 192.168.101.1
+#
+sysname swt02klngc-bj03
+#
+undo ftp server source all-interface
+undo ftp ipv6 server source all-interface
+#
+dfs-group 1
+priority 120
+source ip 192.168.101.2 vpn-instance mgmt peer 192.168.101.1
+authentication-mode hmac-sha256 password Key46wan!
+dual-active detection enhanced enable
+#
+info-center loghost 10.50.27.184 local-time
+info-center loghost 10.50.27.185 local-time
+info-center timestamp debugging date precision-time second
+info-center timestamp log date without-timezone
+info-center logbuffer size 10240
+#
+system resource large-route
+#
+device board 1 board-type CE6881-48T6CQ
+#
+drop-profile default
+#
+dcb pfc
+#
+ntp server source-interface all disable
+ntp ipv6 server source-interface all disable
+#
+vlan batch 25 100 155 180
+#
+stp mode rstp
+stp v-stp enable
+stp bpdu-protection
+stp pathcost-standard legacy
+stp tc-protection
+#
+icmp name timestamp-reply send disable
+#
+telnet server disable
+telnet ipv6 server disable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+clock timezone HKT add 08:00:00
+#
+ip vpn-instance mgmt
+ipv4-family
+#
+vlan 25
+name CDIP_SAN_49.46.0/27
+#
+vlan 100
+#
+vlan 155
+name IIO_Segment_28.208/28
+#
+vlan 180
+name KLNGC_Mgt_NS_10.134.129.0/24
+#
+dhcp server request-packet all-interface disable
+#
+acl number 2051
+step 10
+rule 10 permit source 10.50.103.86 0
+rule 20 permit source 10.50.156.174 0
+rule 30 permit source 10.50.156.177 0
+rule 40 permit source 10.50.101.100 0
+rule 50 permit source 10.50.101.102 0
+rule 60 permit source 10.50.102.220 0
+rule 70 permit source 10.50.20.174 0
+rule 80 permit source 10.50.29.175 0
+rule 90 permit source 10.50.29.174 0
+rule 100 permit source 10.50.102.209 0
+rule 110 permit source 10.50.29.177 0
+rule 120 permit source 10.50.27.183 0
+rule 130 permit source 10.50.29.178 0
+rule 140 permit source 10.50.27.185 0
+rule 150 permit source 10.50.20.177 0
+rule 160 permit source 10.50.27.189 0
+rule 170 permit source 10.50.29.143 0
+rule 180 permit source 10.50.29.142 0
+rule 190 permit source 10.50.28.139 0
+rule 200 permit source 10.50.29.148 0
+rule 210 permit source 10.50.29.145 0
+rule 220 permit source 10.50.29.147 0
+rule 230 permit source 10.50.241.118 0
+rule 240 permit source 10.50.250.15 0
+rule 250 permit source 10.50.29.150 0
+rule 260 permit source 10.50.190.111 0
+#
+acl name remote-access-control number 3000
+step 10
+rule 10 deny ip source 10.49.19.64 0.0.0.63
+rule 20 deny ip source 10.49.27.0 0.0.0.255
+rule 30 deny ip source 10.49.28.0 0.0.0.63
+rule 40 deny ip source 10.49.28.64 0.0.0.31
+rule 50 deny ip source 10.49.29.0 0.0.0.7
+rule 60 deny ip source 10.49.30.0 0.0.0.15
+rule 70 deny ip source 10.50.1.240 0.0.0.15
+rule 80 permit tcp source 10.49.0.0 0.0.31.255 destination-port eq 22
+rule 90 permit tcp source 10.50.1.0 0.0.0.255 destination-port eq 22
+rule 100 permit tcp source 10.50.32.0 0.0.0.255 destination-port eq 22
+rule 110 permit tcp source 10.50.48.0 0.0.0.255 destination-port eq 22
+rule 120 permit tcp source 10.50.64.0 0.0.0.255 destination-port eq 22
+rule 130 permit tcp source 10.50.80.0 0.0.0.255 destination-port eq 22
+rule 140 permit tcp source 10.50.112.0 0.0.0.255 destination-port eq 22
+rule 150 permit tcp source 10.50.128.0 0.0.0.255 destination-port eq 22
+rule 160 permit tcp source 10.50.160.0 0.0.0.255 destination-port eq 22
+rule 170 permit tcp source 10.50.176.0 0.0.0.255 destination-port eq 22
+rule 180 permit tcp source 10.50.24.0 0.0.0.63 destination-port eq 22
+rule 190 permit tcp source 10.50.31.0 0.0.0.63 destination-port eq 22
+rule 200 permit tcp source 10.50.42.0 0.0.0.255 destination-port eq 22
+rule 210 permit tcp source 10.50.43.0 0.0.0.255 destination-port eq 22
+rule 220 permit tcp source 10.50.49.0 0.0.0.127 destination-port eq 22
+rule 230 permit tcp source 10.50.50.0 0.0.0.127 destination-port eq 22
+rule 240 permit tcp source 10.49.16.4 0 destination-port eq 22
+rule 250 permit tcp source 10.49.17.4 0 destination-port eq 22
+rule 260 permit tcp source 10.49.18.4 0 destination-port eq 22
+rule 270 permit tcp source 10.50.101.100 0 destination-port eq 22
+rule 280 permit tcp source 10.50.101.101 0 destination-port eq 22
+rule 290 permit tcp source 10.50.255.84 0 destination-port eq 22
+rule 300 permit tcp source 10.50.255.85 0 destination-port eq 22
+rule 310 permit tcp source 10.50.255.86 0 destination-port eq 22
+rule 320 permit tcp source 10.50.251.20 0 destination-port eq 22
+rule 330 permit tcp source 10.50.56.20 0 destination-port eq 22
+rule 340 permit tcp source 10.50.27.184 0 destination-port eq 22
+rule 350 permit tcp source 10.50.27.185 0 destination-port eq 22
+rule 360 permit tcp source 10.50.241.240 0.0.0.15 destination-port eq 22
+rule 370 permit tcp source 10.50.243.240 0.0.0.15 destination-port eq 22
+rule 380 deny ip logging
+#
+aaa
+undo local-user policy security-enhance
+local-user pccw@hkt password irreversible-cipher $1c$@:C1PbRA>U$-Pb@5(M1\E*F<uC}u`v%VJ-UWh&1H#+j)\=u1`)B$
+local-user pccw@hkt service-type terminal ssh http
+local-user pccw@hkt level 3
+local-user luser@pdn password irreversible-cipher $1c$:!(-9jb]<*$maA1RQ4hiJjU8@Hp24IQ'H.r;@Hxi17hQ.'6BqnC$
+local-user luser@pdn service-type terminal ssh http
+local-user luser@pdn level 3
+#
+authentication-scheme default
+#
+authorization-scheme default
+#
+accounting-scheme default
+#
+domain default
+#
+domain default_admin
+#
+stack
+#
+license
+#
+interface Vlanif180
+ip address 10.134.129.37 255.255.255.0
+#
+interface MEth0/0/0
+ip binding vpn-instance mgmt
+ip address 192.168.101.1 255.255.255.252
+#
+interface Eth-Trunk0
+mode lacp-static
+peer-link 1
+#
+interface Eth-Trunk1
+description uplink to Distribution Switch
+port link-type trunk
+port trunk allow-pass vlan 
+mode lacp-static
+dfs-group 1m-lag 1
+#
+interface 10GE1/0/1
+port default vlan 25
+stp edged-port enable
+#
+interface 10GE1/0/2
+port default vlan 25
+stp edged-port enable
+#
+interface 10GE1/0/3
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/4
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/5
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/6
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/7
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/8
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/9
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/10
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/11
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/12
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/13
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/14
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/15
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/16
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/17
+undo portswitch
+ip address 10.50.99.9 255.255.255.252
+#
+interface 10GE1/0/18
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/19
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/20
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/21
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/22
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/23
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/24
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/25
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/26
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/27
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/28
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/29
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/30
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/31
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/32
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/33
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/34
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/35
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/36
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/37
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/38
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/39
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/40
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/41
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/42
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/43
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/44
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/45
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/46
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/47
+shutdown
+stp edged-port enable
+#
+interface 10GE1/0/48
+shutdown
+stp edged-port enable
+#
+interface 100GE1/0/1
+description uplink to Distribution swd01klngc
+eth-trunk 1
+device transceiver 40GBASE-FIBER
+#
+interface 100GE1/0/2
+description uplink to Distribution swd02klngc
+eth-trunk 1
+device transceiver 40GBASE-FIBER
+#
+interface 100GE1/0/3
+device transceiver 40GBASE-FIBER
+#
+interface 100GE1/0/4
+#
+interface 100GE1/0/5
+description peer-link
+eth-trunk 0
+device transceiver 40GBASE-COPPER
+#
+interface 100GE1/0/6
+description peer-link
+eth-trunk 0
+device transceiver 40GBASE-COPPER
+#
+interface NULL0
+#
+route loop-detect ospf enable
+#
+ip route-static 0.0.0.0 0.0.0.0 10.134.129.1
+#
+snmp-agent
+snmp-agent local-engineid 800007DB0358AEA8DC2551
+#
+snmp-agent sys-info location NXXXX,AW12,KLNGC
+snmp-agent sys-info version v2c v3
+snmp-agent target-host host-name __targetHost_1_55424 trap address udp-domain 10.50.29.145 params securityname cipher %^%#|M9GK@BMLPG;3DJeO@%BKdErNKmvgI{K2-=URxW(%^%#
+snmp-agent target-host host-name __targetHost_2_43744 trap address udp-domain 10.50.29.150 params securityname cipher %^%#frg<IJdXI8e|&j;Lr5e4T+^P.AQPfI92R2"!$`~8%^%#
+snmp-agent target-host host-name __targetHost_3_41592 trap address udp-domain 10.50.190.111 params securityname cipher %^%#${^$;!_<1Ly01;7+/Nh>S*NWV+|iG:eX6`M<u0tQ%^%#
+#
+undo snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+stelnet server enable
+ssh server authentication-type keyboard-interactive enable
+ssh server-source all-interface
+undo ssh ipv6 server-source all-interface
+ssh server ip-block disable
+ssh authorization-type default aaa
+#
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_256_96 sha2_256 sha1_96
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521 sm2_kep
+#
+ssh server publickey rsa_sha2_256 rsa_sha2_512
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+#
+ssh client publickey rsa_sha2_256 rsa_sha2_512
+#
+ssh client cipher aes256_ctr aes128_ctr
+ssh client hmac sha2_256
+ssh client key-exchange dh_group_exchange_sha256
+#
+header login file flash:/banner.txt
+#
+dns domain hpf.gov.hk
+#
+user-interface con 0
+authentication-mode password
+set authentication password cipher $1c$;j<8SBuAj+$@S|x9Ip3KV9*Q#EFR#wIC^PLTRK!dDK#'%BpJ&ZY$
+#
+user-interface vty 0 4
+authentication-mode aaa
+protocol inbound ssh
+#
+warranty
+#
+return
+<swt01klngc-bm08>

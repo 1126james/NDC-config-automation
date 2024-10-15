@@ -1,0 +1,30 @@
+hostname
+ip address = Vlanif180 ip
+subnetmask = Vlanif180 subnetmask
+default gateway = ip route-static  10.134.129.1
+
+
+#
+interface 10GE1/0/1
+ port default vlan (NEW VLAN)
+ stp edged-port enable
+#
+interface 10GE1/0/2
+ port default vlan (NEW VLAN)
+ stp edged-port enable
+#
+
+
+
+
+interface Eth-Trunk1
+port trunk allow-pass (ALL VLAN)+180
+
+
+
+after split("-")
+
+aw14
+
+print all where hostname contain aw14
+
